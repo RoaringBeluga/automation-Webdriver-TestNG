@@ -83,15 +83,30 @@ public class SearchTestRunner {
  * All browser-specific stuff goes to specific classes extending this one.
  */
 class browserTest {
+    /**
+     * WebDriver instance used for testing.
+     */
     WebDriver driver;
+    /**
+     * WebDriverWait instance used to wait for an element to become visible.
+     */
     WebDriverWait wait;
+    /**
+     * Browser name. No actual purpose, just so we can print a browser name.
+     */
+    String browserName;
 
     public browserTest() {
         // Nothing to do here
     }
 
+    /**
+     * Close the browser instance after running all test steps.
+     * Makes for tidier desktop. Also, modern browsers are memory hogs.
+     */
     public void tearDown(){
-        driver.quit(); // Let's clean up after tests
+        System.out.println(this.browserName+": Closing...");
+        this.driver.quit(); // Let's clean up after tests
     }
 
     /**
@@ -99,6 +114,7 @@ class browserTest {
      * @param gotoURL Website address to navigate to
      */
     public void navigateTo(String gotoURL) {
+        System.out.println(this.browserName+": Navigating to "+gotoURL);
         this.driver.get(gotoURL);
     }
 
@@ -160,7 +176,7 @@ class ChromeTest extends browserTest {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver");
         this.driver = new ChromeDriver();
         this.wait = new WebDriverWait(this.driver, 40);
-
+        this.browserName = "Chrome";
     }
 }
 
@@ -172,5 +188,6 @@ class FirefoxTest extends browserTest {
         System.setProperty("webdriver.gecko.driver", "src/test/resources/geckodriver");
         this.driver = new FirefoxDriver();
         this.wait = new WebDriverWait(this.driver, 40);
+        this.browserName = "Firefox";
     }
 }
