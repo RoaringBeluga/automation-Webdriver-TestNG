@@ -1,0 +1,51 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="EverythingAndEveryone" verbose="1" >
+<!-- Google search -->
+    <test name="TestGoogleSearch">
+        <parameter name="queryText" value="Portnov Computer School"/>
+        <classes>
+            <class name="GoogleSearchTest">
+                <methods>
+                    <include name="test0001"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+<!-- Dropdown test – should pass one and fail one -->
+    <test name="DropDownTest">
+        <classes>
+            <class name="DropDownTest">
+                <methods>
+                    <include name="test001" />
+                    <exclude name="test002" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+<!-- Checkbox tests – all should pass -->
+    <test name="CheckboxTestFull">
+        <classes>
+            <class name="CheckboxTest">
+                <methods>
+                    <include name="test_001" />
+                    <include name="test_002" />
+                    <include name="test_003" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+<!-- Checkbox test – shortened -->
+    <test name="CheckboxTestShort">
+        <classes>
+            <class name="CheckboxTest">
+                <methods>
+                    <exclude name="test001" />
+                    <exclude name="test002" />
+                    <include name="test_003" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

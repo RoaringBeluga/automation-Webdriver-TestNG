@@ -3,9 +3,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Test;
+import org.testng.SkipException;
+import org.testng.annotations.*;
 
 import java.util.List;
 
@@ -15,15 +14,22 @@ public class CheckboxTest {
 
     List<WebElement> listOfInputs;
 
-    @BeforeSuite
+    @BeforeClass
     public void setUp() {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver");
-        chromedriver = new ChromeDriver();
-        openBrowser();
-        listOfInputs = chromedriver.findElements(By.tagName("input"));
+        try {
+            chromedriver = new ChromeDriver();
+            openBrowser();
+            listOfInputs = chromedriver.findElements(By.tagName("input"));
+        } catch (Exception e) {
+            System.out.println("Oh, but it's dead as something REALLY dead!");
+            Assert.assertNotNull(chromedriver, "driver is Null somehow. Rats!");
+            Assert.fail("Goodbye, cruel world!");
+            throw new SkipException("SkipException thrown in...");
+        }
     }
 
-    @AfterSuite
+    @AfterClass
     public void tearDown() {
         chromedriver.quit();
     }

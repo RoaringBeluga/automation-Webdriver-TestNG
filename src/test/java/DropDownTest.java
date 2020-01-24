@@ -44,7 +44,7 @@ public class DropDownTest {
 
         } catch (Exception e) {
             System.out.println("Exception: "+e.getMessage());
-            Assert.fail("Test failed.");
+            Assert.fail("Test failed – as it was designed.");
         }
 
     }
@@ -57,7 +57,7 @@ public class DropDownTest {
         driver.get(theURL);
     }
 
-    @BeforeSuite
+    @BeforeClass
     public void setUp() {
         System.setProperty("webdriver.gecko.driver", "src/test/resources/geckodriver");
     }
